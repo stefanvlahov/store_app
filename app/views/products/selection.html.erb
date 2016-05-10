@@ -1,0 +1,9 @@
+<h1>Car Selection</h1>
+
+<% @products.each do |product| %>
+  <p>Make: <%= product.make %></p>
+  <p>Model: <%= product.model %></p>
+  <p>Price: <%= product.price %></p>
+  <img src=<%= product.image %>>
+  <p>Description: <%= product.description%></p>
+<% end %>
