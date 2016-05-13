@@ -1,0 +1,23 @@
+<h1>Enter a new car:</h1>
+
+<%= form_tag "/cars", method: :post do %>
+  <div>
+    <%= label_tag :make %>
+    <%= text_field_tag :make %>
+  </div>
+  <div>
+    <%= label_tag :model %>
+    <%= text_field_tag :model %>
+  </div>
+  <div>
+    <%= label_tag :price %>
+    <%= text_field_tag :price %>
+  </div>
+  <div>
+    <%= label_tag :description %>
+    <%= text_field_tag :description %>
+  </div>
+  <div>
+    <%= submit_tag "Create It!" %>
+  </div>
+<% end %>

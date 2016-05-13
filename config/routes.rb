@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  get "/cars" => "products#selection"
+  get "/" => "products#index"
+  get "/cars" => "products#index"
+
+  get "/cars/new" => "products#new"
+  post "/cars" => "products#create"
+
+  get "/cars/:id" => "products#show"
+
+  get "/cars/:id/edit" => "products#edit"
+  patch "/cars/:id" => "products#update"
 end
