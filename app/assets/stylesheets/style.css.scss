@@ -1,0 +1,23 @@
+$accent-color: #2E508A;
+
+body {
+  font-family: Optima,Segoe,"Segoe UI",Candara,Calibri,Arial,sans-serif;
+  background-image: url("dust.png");
+}
+
+h1 {
+  border-bottom: solid $accent-color 1px;
+}
+
+a {
+  color: #255A6F;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $accent-color;
+}
+
+.thumbnail {
+  height: 500px;
+}

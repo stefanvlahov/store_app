@@ -18,6 +18,10 @@
     <%= text_field_tag :description, @car.description %>
   </div>
   <div>
+    <%= label_tag :image %>
+    <%= text_field_tag :image, @car.image %>
+  </div>
+  <div>
     <%= submit_tag "Edit It!" %>
   </div>
 <% end %>

@@ -3,6 +3,7 @@
 <h4><%= @car.price %></h4>
 <img src=<%= @car.image %>>
 <h4><%= @car.description %></h4>
+<h5>Last Updated On: <%= @car.updated_at.strftime("%A, %b %d") %></h5>
 
 
 <h5><a href="/cars/<%= @car.id %>/edit">Edit</a></h5>

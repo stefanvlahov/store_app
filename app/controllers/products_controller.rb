@@ -16,8 +16,10 @@ class ProductsController < ApplicationController
       make: params[:make],
       model: params[:model],
       price: params[:price],
-      description: params[:description]
+      description: params[:description],
+      image: params[:image]
     )
+    flash[:success] = "Car Created"
     redirect_to "/cars/#{ @car.id }"
   end
 
@@ -32,9 +34,11 @@ class ProductsController < ApplicationController
     make: params[:make],
     model: params[:model],
     price: params[:price],
-    description: params[:description]
+    description: params[:description],
+    image: params[:image]
   )
 
+  flash[:success] = "Car Updated"
   redirect_to "/cars/#{ @car.id }"
   end
 
@@ -42,8 +46,8 @@ class ProductsController < ApplicationController
     @car = Product.find(params[:id])
     @car.destroy
 
+    flash[:warning] = "Car Destroyed"
     redirect_to "/"
   end
-
 
 end

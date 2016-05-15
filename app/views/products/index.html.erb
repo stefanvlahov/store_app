@@ -1,10 +1,16 @@
 <h1>Car Selection</h1>
 
-<% @cars.each do |car| %>
-  <h2>Make: <a href="/cars/<%= car.id %>"><%= car.make %></a></h2>
-  <!-- <h2><%= link_to car.make, "/cars/#{car.id}" %></h2> -->
-  <p>Model: <%= car.model %></p>
-  <p>Price: <%= car.price %></p>
-  <img src=<%= car.image %>>
-  <p>Description: <%= car.description%></p>
-<% end %>
+<div class="row">
+  <% @cars.each do |car| %>
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <!-- <h2>Make: <a href="/cars/<%= car.id %>"><%= car.make %></a></h2> -->
+        <h2><%= link_to car.make, "/cars/#{car.id}" %></h2>
+        <p>Model: <%= car.model %></p>
+        <p>Price: <%= car.price %></p>
+        <p>Description: <%= car.description%></p>
+        <a href="/cars/<%= car.id %>"><%= image_tag car.image %></a>
+        </div>
+    </div>
+  <% end %>
+</div>
