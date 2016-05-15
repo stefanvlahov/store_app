@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   get "/cars/:id/edit" => "products#edit"
   patch "/cars/:id" => "products#update"
+
+  delete "/cars/:id" => "products#destroy"
 end

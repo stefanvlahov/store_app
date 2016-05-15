@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
       price: params[:price],
       description: params[:description]
     )
-    render "show.html.erb"
+    redirect_to "/cars/#{ @car.id }"
   end
 
   def edit
@@ -35,6 +35,15 @@ class ProductsController < ApplicationController
     description: params[:description]
   )
 
-  render "show.html.erb"
+  redirect_to "/cars/#{ @car.id }"
   end
+
+  def destroy
+    @car = Product.find(params[:id])
+    @car.destroy
+
+    redirect_to "/"
+  end
+
+
 end

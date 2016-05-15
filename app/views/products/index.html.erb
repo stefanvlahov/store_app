@@ -1,7 +1,7 @@
 <h1>Car Selection</h1>
 
 <% @cars.each do |car| %>
-  <h2>Make:<a href="/cars/<%= car.id %>"><%= car.make %></a></h2>
+  <h2>Make: <a href="/cars/<%= car.id %>"><%= car.make %></a></h2>
   <!-- <h2><%= link_to car.make, "/cars/#{car.id}" %></h2> -->
   <p>Model: <%= car.model %></p>
   <p>Price: <%= car.price %></p>
