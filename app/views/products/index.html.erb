@@ -4,7 +4,6 @@
   <% @cars.each do |car| %>
     <div class="col-md-4">
       <div class="thumbnail">
-        <!-- <h2>Make: <a href="/cars/<%= car.id %>"><%= car.make %></a></h2> -->
         <h2><%= link_to car.make, "/cars/#{car.id}" %></h2>
         <p>Model: <%= car.model %></p>
         <p>Price: <%= number_to_currency(car.price) %></p>

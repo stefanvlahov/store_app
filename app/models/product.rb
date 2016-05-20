@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
+  belongs_to :suppliers
 
   TAXRATE = 0.09
 

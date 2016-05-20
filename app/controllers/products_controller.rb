@@ -1,19 +1,23 @@
 class ProductsController < ApplicationController
   def index
-    rise = params[:ascending]
-    fall = params[:descending]
+    @cars = Product.all
+    attribute = params[:sort]
+    sort_order = params[:sort_order]
     discount = params[:discount]
-
-    if rise
-      @cars = Product.order(:price)
-    elsif fall
-      @cars = Product.order(price: :desc)
-    else
-      @cars = Product.all
-    end
+    search_term = params[:search_term]
 
     if discount
-      @cars = Product.where("price <= ?", 25000)
+      @cars = Product.where("price <= ?", discount)
+    end
+
+    if sort_order && attribute
+      @cars = @cars.order(attribute => sort_order)
+    elsif attribute
+      @cars = @cars.order(attribute)
+    end
+
+    if search_term
+      @cars = @cars.where("make LIKE ? model LIKE ? description LIKE ?", "%#{search_term}%", "%#{search_term}%", "%#{search_term}%")
     end
 
   end
@@ -38,7 +42,8 @@ class ProductsController < ApplicationController
       model: params[:model],
       price: params[:price],
       description: params[:description],
-      image: params[:image]
+      image: params[:image],
+      supplier_id: params[:supplier_id]
     )
     flash[:success] = "Car Created"
     redirect_to "/cars/#{ @car.id }"
@@ -56,7 +61,8 @@ class ProductsController < ApplicationController
     model: params[:model],
     price: params[:price],
     description: params[:description],
-    image: params[:image]
+    image: params[:image],
+    supplier_id: params[:supplier_id]
   )
 
   flash[:success] = "Car Updated"
