@@ -4,12 +4,33 @@
 <h4>Tax: <%= number_to_currency(@car.tax) %></h4>
 <h4>Total: <%= number_to_currency(@car.total_cost) %></h4>
 <h4><%= @car.sale_message %></h4>
-<img src=<%= @car.image %>>
-<h4><%= @car.description %></h4>
-<h4>Supplier: <%= @car.supplier_id %></h4>
-<h5>Last Updated On: <%= @car.updated_at.strftime("%A, %b %d") %></h5>
+<div class="col-md-8">
+  <div class="thumbnail">
+      <% @car.images.each do |image_object| %>
+        <img src=<%= image_object.image_url %>>
+      <% end %>
+    <br>
+    <h2>How many would you like to buy?</h2>
+    <%= form_tag "/orders", method: :post do %>
+      <div>
+        <%= label_tag :quantity %>
+        <%= text_field_tag :quantity %>
+      </div>
+      <div>
+        <%= hidden_field_tag :product_id, @car.id %>
+      </div>
+      <div>
+        <%= submit_tag "Buy Now!!", class: "btn btn-default"%>
+      </div>
+    <% end %>
+
+    <h4><%= @car.description %></h4>
+    <h4>Supplier: <%= @car.supplier.name %></h4>
+    <h5>Last Updated On: <%= @car.updated_at.strftime("%A, %b %d") %></h5>
 
 
-<h5><a href="/cars/<%= @car.id %>/edit">Edit</a></h5>
+    <h5><a href="/cars/<%= @car.id %>/edit">Edit</a></h5>
 
-<h5><%= link_to "Delete", "/cars/#{@car.id}", method: :delete %></h5>
+    <h5><%= link_to "Delete", "/cars/#{@car.id}", method: :delete %></h5>
+  </div>
+</div>

@@ -2,13 +2,14 @@
 
 <div class="row">
   <% @cars.each do |car| %>
+
     <div class="col-md-4">
       <div class="thumbnail">
         <h2><%= link_to car.make, "/cars/#{car.id}" %></h2>
         <p>Model: <%= car.model %></p>
         <p>Price: <%= number_to_currency(car.price) %></p>
+        <a href="/cars/<%= car.id %>" title="View Car"><img src="<%= car.image_preview_url %>"></a>
         <p>Description: <%= car.description%></p>
-        <a href="/cars/<%= car.id %>"><%= image_tag car.image %></a>
         </div>
     </div>
   <% end %>
