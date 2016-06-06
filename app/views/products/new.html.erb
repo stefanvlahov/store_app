@@ -1,21 +1,25 @@
+<% @car.errors.full_messages.each do |error| %>
+  <h3><%= error %></h3>
+<% end %>
+
 <h1>Enter a new car:</h1>
 
 <%= form_tag "/cars", method: :post do %>
   <div>
     <%= label_tag :make %>
-    <%= text_field_tag :make %>
+    <%= text_field_tag :make, @car.make %>
   </div>
   <div>
     <%= label_tag :model %>
-    <%= text_field_tag :model %>
+    <%= text_field_tag :model, @car.model%>
   </div>
   <div>
     <%= label_tag :price %>
-    <%= text_field_tag :price %>
+    <%= text_field_tag :price, @car.price %>
   </div>
   <div>
     <%= label_tag :description %>
-    <%= text_field_tag :description %>
+    <%= text_field_tag :description, @car.description %>
   </div>
   <div>
     <%= label_tag :image %>

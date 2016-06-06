@@ -1,0 +1,10 @@
+<h1><%= current_user.email %> Your Order Summary:</h1>
+<div class="col-md-8">
+  <div class="thumbnail">
+      <% @cart.each do |car| %>
+      <h3><%= car.product.model %> - <%= car.quantity %> x <%= number_to_currency(car.product.price) %> :
+      <%= link_to "Remove", "/cart/#{car.id}", method: :delete %></h3>
+      <% end %>
+    </div>
+    <%= link_to "Buy Now!", "/orders", method: :post, class: "btn btn-default" %>
+  </div>

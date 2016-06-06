@@ -23,20 +23,25 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <% if user_signed_in? && current_user.admin %>
         <li class="active"><a href="/cars/new">New<span class="sr-only">(current)</span></a></li>
+        <% end %>
         <% if user_signed_in? %>
             <li class="active"><a href="#"><%= current_user.email %><span class="sr-only">(current)</span></a></li>
         <% end %>
         <li><a href="http://www.caranddriver.com/" target="_blank">Car Reviews</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
+            <li><% if user_signed_in? && current_user.admin %>
+                  <li><%= link_to "New Car", "cars/new" %></li>
+            <% end %></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <% if user_signed_in? %>
               <li><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
+              <li><%= link_to "Cart (#{@cart_count})", "/cart", method: :get %></li>
             <% else %>
               <li><%= link_to "Sign Up", "/users/sign_up" %></li>
               <li><%= link_to "Sign In", "/users/sign_in" %></li>
@@ -56,6 +61,8 @@
           <%= submit_tag "Search", class: "btn btn-default" %>
         <% end %>
 
+
+
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/?discount=25000">Discount Items!</a></li>
         <li class="dropdown">
@@ -65,7 +72,11 @@
             <li><a href="/?sort=price&sort_order=desc">Price Highest - Lowest</a></li>
             <li><a href="/cars/random">Random Car</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+
+            <% Category.all.each do  |category| %>
+              <li><a href="/?category=<%= category.origin %>"><%= category.origin %></a></li>
+            <% end %>
+
           </ul>
         </li>
       </ul>

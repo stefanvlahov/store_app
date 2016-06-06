@@ -1,3 +1,7 @@
+<% @car.errors.full_messages.each do |error| %>
+  <h3><%= error %></h3>
+<% end %>
+
 <h1>Edit the car:</h1>
 
 <%= form_tag "/cars/#{ @car.id }", method: :patch do %>
@@ -16,10 +20,6 @@
   <div>
     <%= label_tag :description %>
     <%= text_field_tag :description, @car.description %>
-  </div>
-  <div>
-    <%= label_tag :image_url %>
-    <%= text_field_tag :image_url, @car.image_url %>
   </div>
   <div>
     <%= label_tag :supplier_id %>

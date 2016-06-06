@@ -1,10 +1,19 @@
 class ProductsController < ApplicationController
+
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
+
     @cars = Product.all
     attribute = params[:sort]
     sort_order = params[:sort_order]
     discount = params[:discount]
     search_term = params[:search_term]
+    category_type = params[:category]
+
+    if category_type
+      @cars = Category.find_by(origin: category_type).products
+    end
 
     if discount
       @cars = Product.where("price <= ?", discount)
@@ -33,6 +42,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @car = Product.new
 
   end
 
@@ -42,15 +52,21 @@ class ProductsController < ApplicationController
       model: params[:model],
       price: params[:price],
       description: params[:description],
-      image: params[:image],
       supplier_id: params[:supplier_id]
     )
-    flash[:success] = "Car Created"
-    redirect_to "/cars/#{ @car.id }"
+    if @car.save
+      Image.create(url: params[:image], product_id: @car.id) if params[:image] != ""
+
+      flash[:success] = "Car Created"
+      redirect_to "/cars/#{ @car.id }"
+    else
+      render :new
+    end
   end
 
   def edit
-    @car = Product.find_by(id: params[:id])
+      @car = Product.find_by(id: params[:id])
+
   end
 
   def update
@@ -61,12 +77,16 @@ class ProductsController < ApplicationController
     model: params[:model],
     price: params[:price],
     description: params[:description],
-    image: params[:image],
     supplier_id: params[:supplier_id]
   )
 
-  flash[:success] = "Car Updated"
-  redirect_to "/cars/#{ @car.id }"
+    if @car.save
+      flash[:success] = "Car Updated"
+      redirect_to "/cars/#{ @car.id }"
+    else
+      render :edit
+    end
+
   end
 
   def destroy

@@ -1,12 +1,18 @@
 class Order < ActiveRecord::Base
 
-  belongs_to :product
+  validates :user_id, presence: true
+
   belongs_to :user
+  has_many :carted_products
+  has_many :products, through: :carted_products
 
   TAXRATE = 0.09
 
-  def calculate_subtotal(price)
-    self.subtotal = price * quantity
+  def calculate_subtotal(cart_items)
+    self.subtotal = 0
+    cart_items.each do |cart_item|
+      self.subtotal += cart_item.product.price * cart_item.quantity
+    end
   end
 
   def calculate_tax

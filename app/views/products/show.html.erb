@@ -10,8 +10,12 @@
         <img src=<%= image_object.image_url %>>
       <% end %>
     <br>
+      <% @car.categories.each do |category| %>
+        <h4>Origin: <%= category.origin %></h4>
+      <% end %>
+      <% if user_signed_in? %>
     <h2>How many would you like to buy?</h2>
-    <%= form_tag "/orders", method: :post do %>
+    <%= form_tag "/cart", method: :post do %>
       <div>
         <%= label_tag :quantity %>
         <%= text_field_tag :quantity %>
@@ -20,17 +24,22 @@
         <%= hidden_field_tag :product_id, @car.id %>
       </div>
       <div>
-        <%= submit_tag "Buy Now!!", class: "btn btn-default"%>
+        <%= submit_tag "Add to Cart", class: "btn btn-default"%>
       </div>
     <% end %>
-
+    <% else %>
+    <h3>If you want to purchase this item please <%= link_to "Sign In", "/users/sign_in" %>.</h3>
+    <% end %>
     <h4><%= @car.description %></h4>
     <h4>Supplier: <%= @car.supplier.name %></h4>
     <h5>Last Updated On: <%= @car.updated_at.strftime("%A, %b %d") %></h5>
 
+    <% if user_signed_in? && current_user.admin %>
+      <h5><a href="/cars/<%= @car.id %>/edit">Edit</a></h5>
 
-    <h5><a href="/cars/<%= @car.id %>/edit">Edit</a></h5>
+      <h5><%= link_to "Delete", "/cars/#{@car.id}", method: :delete %></h5>
+    <% end %>
 
-    <h5><%= link_to "Delete", "/cars/#{@car.id}", method: :delete %></h5>
+
   </div>
 </div>
