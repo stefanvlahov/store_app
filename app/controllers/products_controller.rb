@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
 
   def index
 
+    @test_api_key = ENV["fidsaofuodsaifudsifudsifsdf"]
+    @test_api_secret = ENV["fsdlkfjsdkfhjsdlfhdkghdfj"]
+
     @cars = Product.all
     attribute = params[:sort]
     sort_order = params[:sort_order]

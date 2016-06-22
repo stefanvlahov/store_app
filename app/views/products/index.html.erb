@@ -10,7 +10,10 @@
         <p>Price: <%= number_to_currency(car.price) %></p>
         <a href="/cars/<%= car.id %>" title="View Car"><img src="<%= car.image_preview_url %>"></a>
         <p>Description: <%= car.description%></p>
-        </div>
+      </div>
     </div>
   <% end %>
 </div>
+
+<p><%= @test_api_key %></p>
+<p><%= @test_api_secret %></p>

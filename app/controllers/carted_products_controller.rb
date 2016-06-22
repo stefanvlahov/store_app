@@ -25,7 +25,7 @@ class CartedProductsController < ApplicationController
       session[:cart_count] = nil
       flash[:success] = "Added to Cart!"
       redirect_to "/cart"
-    end
+  end
 
     def destroy
       @carted_car = CartedProduct.find(params[:id])
